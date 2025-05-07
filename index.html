@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TS Todo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body class="bg-black">
+    <div class="flex flex-col items-center justify-center rounded mt-[200px] todo__content">
+      <div class="border border-yellow-500 rounded-xl shadow-2xl shadow-yellow-500">
+          <form class="flex justify-center items-center">
+               <input
+                 type="text"
+                 name="name"
+                 placeholder="Ism"
+                 class="border p-2 m-2 bg-black border-yellow-500 rounded-xl text-yellow-500"
+               />
+               <input
+                 type="number"
+                 name="age"
+                 placeholder="Yosh"
+                 class="border p-2 m-2 bg-black border-yellow-500 rounded-xl text-yellow-500"
+               />
+               <button type="submit" class="bg-black border border-yellow-500 text-yellow-500 text-white p-2 m-2 rounded">
+                 Qo'shish
+               </button>
+             </form>
+       
+             <ul class="max-w-[500px] mx-auto"></ul>
+       
+             <template>
+               <li
+                 class="flex items-center justify-between bg-white p-4 mb-2 rounded shadow-md"
+               >
+                 <div>
+                   <h4 class="font-bold text-lg"></h4>
+                   <h5 class="text-gray-500"></h5>
+                 </div>
+                 <div class="flex items-center">
+                   <button
+                     class="bg-red-500 text-white p-2 rounded mr-2"
+                     id="delete__btn"
+                   >
+                     <i class="fa-solid fa-trash"></i>
+                   </button>
+                   <button
+                     class="bg-yellow-500 text-white p-2 rounded"
+                     id="rename__btn"
+                   >
+                     <i class="fa-regular fa-pen-to-square"></i>
+                   </button>
+                 </div>
+               </li>
+             </template>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

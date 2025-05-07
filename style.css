@@ -1,0 +1,22 @@
+input::placeholder{
+     color: yellow;
+}
+
+input:active{
+     border-color: yellow;
+}
+
+.todo__content{
+     height: fit-content;
+}
+
+#delete__btn:hover{
+     transform: rotate(360deg);
+     transition: 0.5s ease;
+}
+
+#rename__btn:hover{
+     transform: rotate(-360deg);
+     transition: 0.5s ease;
+
+}
