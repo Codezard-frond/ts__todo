@@ -6,6 +6,9 @@ const nameInput = form.elements.namedItem("name");
 const ageInput = form.elements.namedItem("age");
 const users = [];
 let editIndex = null;
+function saveToLocalStorage() {
+    localStorage.setItem("users", JSON.stringify(users));
+}
 function updateUI(users) {
     ul.innerHTML = "";
     users.forEach((item, index) => {
@@ -19,6 +22,7 @@ function updateUI(users) {
         delete__btn.addEventListener("click", () => {
             users.splice(index, 1);
             updateUI(users);
+            saveToLocalStorage();
         });
         rename__btn.addEventListener("click", () => {
             nameInput.value = item.name;
@@ -27,6 +31,7 @@ function updateUI(users) {
         });
         ul.appendChild(clone);
     });
+    saveToLocalStorage();
 }
 form.addEventListener("submit", (e) => {
     e.preventDefault();

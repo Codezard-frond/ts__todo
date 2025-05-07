@@ -12,6 +12,10 @@ type User = {
 const users: User[] = [];
 let editIndex: number | null = null;
 
+function saveToLocalStorage() {
+  localStorage.setItem("users", JSON.stringify(users));
+}
+
 function updateUI(users: User[]) {
   ul.innerHTML = "";
 
@@ -28,6 +32,7 @@ function updateUI(users: User[]) {
     delete__btn.addEventListener("click", () => {
       users.splice(index, 1);
       updateUI(users);
+      saveToLocalStorage();
     });
 
     rename__btn.addEventListener("click", () => {
@@ -38,6 +43,7 @@ function updateUI(users: User[]) {
 
     ul.appendChild(clone);
   });
+  saveToLocalStorage();
 }
 
 form.addEventListener("submit", (e: Event) => {
@@ -49,11 +55,9 @@ form.addEventListener("submit", (e: Event) => {
   if (!name || !age) return;
 
   if (editIndex !== null) {
-    
     users[editIndex] = { name, age };
     editIndex = null;
   } else {
-   
     users.push({ name, age });
   }
 
