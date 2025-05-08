@@ -9,16 +9,22 @@ type User = {
   age: number;
 };
 
-const users: User[] = [];
+let users: User[] = [];  
 let editIndex: number | null = null;
 
 function saveToLocalStorage() {
   localStorage.setItem("users", JSON.stringify(users));
 }
 
-function updateUI(users: User[]) {
-  ul.innerHTML = "";
+function loadFromLocalStorage() {
+  const storedUsers = localStorage.getItem("users");
+  if (storedUsers) {
+    users = JSON.parse(storedUsers);  
+    updateUI(users); 
+  }
+}
 
+function updateUI(users: User[]) {
   users.forEach((item, index) => {
     const clone = template.content.cloneNode(true) as DocumentFragment;
     const h4 = clone.querySelector("h4")!;
@@ -30,9 +36,9 @@ function updateUI(users: User[]) {
     h5.textContent = item.age.toString();
 
     delete__btn.addEventListener("click", () => {
-      users.splice(index, 1);
-      updateUI(users);
-      saveToLocalStorage();
+      users.splice(index, 1);  
+      saveToLocalStorage();  
+      updateUI(users);  
     });
 
     rename__btn.addEventListener("click", () => {
@@ -43,7 +49,6 @@ function updateUI(users: User[]) {
 
     ul.appendChild(clone);
   });
-  saveToLocalStorage();
 }
 
 form.addEventListener("submit", (e: Event) => {
@@ -55,12 +60,15 @@ form.addEventListener("submit", (e: Event) => {
   if (!name || !age) return;
 
   if (editIndex !== null) {
-    users[editIndex] = { name, age };
+    users[editIndex] = { name, age }; 
     editIndex = null;
   } else {
-    users.push({ name, age });
+    users.push({ name, age });  
   }
 
-  updateUI(users);
-  form.reset();
+  saveToLocalStorage(); 
+  updateUI(users); 
+  form.reset();  
 });
+
+loadFromLocalStorage();

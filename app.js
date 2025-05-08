@@ -4,10 +4,17 @@ const ul = document.querySelector("ul");
 const template = document.querySelector("template");
 const nameInput = form.elements.namedItem("name");
 const ageInput = form.elements.namedItem("age");
-const users = [];
+let users = [];
 let editIndex = null;
 function saveToLocalStorage() {
     localStorage.setItem("users", JSON.stringify(users));
+}
+function loadFromLocalStorage() {
+    const storedUsers = localStorage.getItem("users");
+    if (storedUsers) {
+        users = JSON.parse(storedUsers);
+        updateUI(users);
+    }
 }
 function updateUI(users) {
     ul.innerHTML = "";
@@ -21,8 +28,8 @@ function updateUI(users) {
         h5.textContent = item.age.toString();
         delete__btn.addEventListener("click", () => {
             users.splice(index, 1);
-            updateUI(users);
             saveToLocalStorage();
+            updateUI(users);
         });
         rename__btn.addEventListener("click", () => {
             nameInput.value = item.name;
@@ -31,7 +38,6 @@ function updateUI(users) {
         });
         ul.appendChild(clone);
     });
-    saveToLocalStorage();
 }
 form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -46,6 +52,8 @@ form.addEventListener("submit", (e) => {
     else {
         users.push({ name, age });
     }
+    saveToLocalStorage();
     updateUI(users);
     form.reset();
 });
+loadFromLocalStorage();
